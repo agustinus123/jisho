@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="appName">Jisho</string>
+
+    <string name="unzipDialogTitle">Please wait…</string>
+    <string name="unzipDialogProgress">Setting up the databases. This may take a few seconds.</string>
+</resources>
