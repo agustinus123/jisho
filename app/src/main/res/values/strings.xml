@@ -4,4 +4,12 @@
 
     <string name="unzipDialogTitle">Please wait…</string>
     <string name="unzipDialogProgress">Setting up the databases. This may take a few seconds.</string>
+
+    <string name="searchHint">Search…</string>
+    <string name="searchMenuItem">Search</string>
+
+    <string name="settingsMenuItem">Settings</string>
+
+    <string name="prefCategoryAbout">About</string>
+    <string name="prefVersionTitle">Version</string>
 </resources>
