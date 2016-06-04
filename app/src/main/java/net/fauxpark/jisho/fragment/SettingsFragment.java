@@ -14,6 +14,6 @@ public class SettingsFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.preferences);
 
         Preference prefVersion = findPreference("prefVersion");
-        prefVersion.setSummary(BuildConfig.VERSION_NAME);
+        prefVersion.setSummary(BuildConfig.VERSION_NAME + "-" + BuildConfig.BUILD_TYPE);
     }
 }
