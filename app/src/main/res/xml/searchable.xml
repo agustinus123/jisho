@@ -2,5 +2,5 @@
 <searchable
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:hint="@string/searchHint"
-    android:label="@string/appName">
+    android:label="@string/searchResultsActivityTitle">
 </searchable>

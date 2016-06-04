@@ -8,7 +8,7 @@
         android:label="@string/appName"
         android:theme="@style/appTheme">
         <activity
-            android:label="Jisho"
+            android:label="@string/mainActivityTitle"
             android:name=".activity.MainActivity">
             <intent-filter>
                 <action
@@ -18,7 +18,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="Settings"
+            android:label="@string/searchResultsActivityTitle"
+            android:name=".activity.SearchResultsActivity"
+            android:parentActivityName=".activity.MainActivity">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
+        <activity
+            android:label="@string/settingsActivityTitle"
             android:name=".activity.SettingsActivity"
             android:parentActivityName=".activity.MainActivity"/>
     </application>
