@@ -1,5 +1,8 @@
 package net.fauxpark.jisho.datasource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -52,5 +55,20 @@ public class KanjiDataSource {
         }
 
         return radical;
+    }
+
+    public List<Kanji> searchKanji(String query) {
+        Cursor c = database.query(KANJI_TABLE, null, "id IN (SELECT id FROM kanjifts WHERE meanings MATCH ?)", new String[] {query}, null, null, null);
+        List<Kanji> kanjiList = new ArrayList<>();
+
+        if(c.getCount() > 0) {
+            while(c.moveToNext()) {
+                kanjiList.add(KanjiMapper.map(c));
+            }
+
+            c.close();
+        }
+
+        return kanjiList;
     }
 }

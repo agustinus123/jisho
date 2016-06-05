@@ -1,11 +1,17 @@
 package net.fauxpark.jisho.activity;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import net.fauxpark.jisho.R;
+import net.fauxpark.jisho.adapter.KanjiListAdapter;
+import net.fauxpark.jisho.model.Kanji;
 import net.fauxpark.jisho.task.SearchTask;
 
 public class SearchResultsActivity extends Activity {
@@ -25,7 +31,11 @@ public class SearchResultsActivity extends Activity {
     private void handleIntent(Intent intent) {
         if(Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            new SearchTask(this).execute(query);
+            TextView empty = (TextView) findViewById(R.id.empty);
+            ListView list = (ListView) findViewById(R.id.list);
+            KanjiListAdapter adapter = new KanjiListAdapter(this, new ArrayList<Kanji>());
+            list.setAdapter(adapter);
+            new SearchTask(this, empty, list, adapter).execute(query);
         }
     }
 }

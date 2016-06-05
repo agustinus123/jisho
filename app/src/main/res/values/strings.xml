@@ -16,4 +16,6 @@
 
     <string name="prefCategoryAbout">About</string>
     <string name="prefVersionTitle">Version</string>
+
+    <string name="noResults">No results.</string>
 </resources>

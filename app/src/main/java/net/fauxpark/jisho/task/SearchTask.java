@@ -1,32 +1,54 @@
 package net.fauxpark.jisho.task;
 
+import java.util.List;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import net.fauxpark.jisho.adapter.KanjiListAdapter;
 import net.fauxpark.jisho.datasource.KanjiDataSource;
 import net.fauxpark.jisho.model.Kanji;
 
-public class SearchTask extends AsyncTask<String, Void, Kanji> {
+public class SearchTask extends AsyncTask<String, Void, List<Kanji>> {
     private static final String TAG = "SearchTask";
 
     private Context context;
 
-    public SearchTask(Context context) {
+    private TextView empty;
+
+    private ListView list;
+
+    private KanjiListAdapter adapter;
+
+    public SearchTask(Context context, TextView empty, ListView list, KanjiListAdapter adapter) {
         this.context = context;
+        this.empty = empty;
+        this.list = list;
+        this.adapter = adapter;
     }
 
     @Override
-    protected Kanji doInBackground(String... params) {
+    protected List<Kanji> doInBackground(String... params) {
         KanjiDataSource kanjiDataSource = new KanjiDataSource(context);
-        Kanji kanji = kanjiDataSource.getKanjiById(Integer.parseInt(params[0]));
+        List<Kanji> kanjiList = kanjiDataSource.searchKanji(params[0]);
         kanjiDataSource.close();
 
-        return kanji;
+        return kanjiList;
     }
 
     @Override
-    protected void onPostExecute(Kanji kanji) {
-        Log.d(TAG, "Result: " + kanji.getLiteral());
+    protected void onPostExecute(List<Kanji> kanjiList) {
+        Log.d(TAG, "Result size: " + kanjiList.size());
+
+        if(kanjiList.size() > 0) {
+            adapter.addAll(kanjiList);
+        } else {
+            list.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+        }
     }
 }
